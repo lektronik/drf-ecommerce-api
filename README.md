@@ -1,4 +1,4 @@
-	Django Ecommerce API
+	Django Rest Framework E-commerce API
 
 	An E-commerce API built using Django Rest Framework.
 
