@@ -8,7 +8,7 @@ Basic Features
   Payment integration using Stripe.
 
 Technologies Used
-  Django Rest Framework
+   Django Rest Framework
   PostgreSQL
   Printify
   Stripe
