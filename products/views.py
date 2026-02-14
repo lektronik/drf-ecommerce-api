@@ -12,10 +12,12 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
 
 
+from django.conf import settings
+
 class PrintifyProductListView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        service = PrintifyService(api_key='your_printify_api_key', shop_id='your_shop_id')
+        service = PrintifyService(api_key=settings.PRINTIFY_API_KEY, shop_id=settings.PRINTIFY_SHOP_ID)
         try:
             products = service.get_products()
             return Response(products, status=status.HTTP_200_OK)
@@ -25,7 +27,7 @@ class PrintifyProductListView(APIView):
 class PrintifyOrderListView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        service = PrintifyService(api_key='your_printify_api_key', shop_id='your_shop_id')
+        service = PrintifyService(api_key=settings.PRINTIFY_API_KEY, shop_id=settings.PRINTIFY_SHOP_ID)
         try:
             orders = service.get_orders()
             return Response(orders, status=status.HTTP_200_OK)
@@ -35,7 +37,7 @@ class PrintifyOrderListView(APIView):
 class PrintifyOrderDetailView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, order_id):
-        service = PrintifyService(api_key='your_printify_api_key', shop_id='your_shop_id')
+        service = PrintifyService(api_key=settings.PRINTIFY_API_KEY, shop_id=settings.PRINTIFY_SHOP_ID)
         try:
             order = service.get_order(order_id)
             return Response(order, status=status.HTTP_200_OK)
@@ -43,7 +45,7 @@ class PrintifyOrderDetailView(APIView):
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, order_id):
-        service = PrintifyService(api_key='your_printify_api_key', shop_id='your_shop_id')
+        service = PrintifyService(api_key=settings.PRINTIFY_API_KEY, shop_id=settings.PRINTIFY_SHOP_ID)
         try:
             updated_order = service.update_order(order_id, request.data)
             return Response(updated_order, status=status.HTTP_200_OK)

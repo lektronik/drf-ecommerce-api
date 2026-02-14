@@ -68,6 +68,18 @@ A production-ready E-commerce REST API backend built with Django REST Framework 
     python manage.py runserver
     ```
 
+### 🐳 Docker Support
+
+To run the application with Docker and PostgreSQL:
+
+1.  **Build and Run**
+    ```bash
+    docker-compose up --build
+    ```
+
+2.  **Access API**
+    The API will be available at `http://localhost:8000/api/`.
+
 ## 🔐 Environment Variables
 
 Ensure the following variables are set in your `.env` file:

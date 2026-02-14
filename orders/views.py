@@ -38,7 +38,7 @@ class StripeWebhookView(APIView):
     def post(self, request):
         payload = request.body
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-        endpoint_secret = 'your_webhook_secret'
+        endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 
         try:
             event = stripe.Webhook.construct_event(
