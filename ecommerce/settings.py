@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@i!fi5qktpu0m3=8645gp=9lul914i#g3^3t(i^0w%7@*n#@-*'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-dev-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -92,11 +93,11 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('db_NAME'),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',  # Set to 'localhost' or the IP address of your PostgreSQL server
-        'PORT': '5432',       # Default PostgreSQL port
+        'NAME': os.getenv('db_NAME', 'ecommerce_db'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -164,8 +165,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False
 
-STRIPE_SECRET_KEY = 'your_stripe_secret_key'
-STRIPE_PUBLISHABLE_KEY = 'your_stripe_publishable_key'
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 
-PRINTIFY_API_KEY = 'your_printify_api_key'
-PRINTIFY_SHOP_ID = 'your_shop_id'
+PRINTIFY_API_KEY = os.getenv('PRINTIFY_API_KEY')
+PRINTIFY_SHOP_ID = os.getenv('PRINTIFY_SHOP_ID')
