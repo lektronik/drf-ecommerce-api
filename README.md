@@ -103,3 +103,21 @@ Ensure the following variables are set in your `.env` file:
 | `POST` | `/api/orders/` | Create a new order |
 | `POST` | `/api/auth/login/` | User login |
 
+
+## 🧪 Testing
+
+To run the test suite, ensure your virtual environment is active and dependencies are installed.
+
+If you don't have a local PostgreSQL instance running, you can run tests using SQLite:
+
+```bash
+export DB_ENGINE=django.db.backends.sqlite3
+export db_NAME=db.sqlite3
+python manage.py test
+```
+
+Otherwise, simply run:
+
+```bash
+python manage.py test
+```
